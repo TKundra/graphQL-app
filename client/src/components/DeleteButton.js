@@ -6,7 +6,6 @@ import { FETCH_POSTS_QUERY, DELETE_COMMENT_MUTATION, DELETE_POST_MUTATION } from
 import MyPopup from '../util/Popup';
 
 function DeleteButton({ postId, commentId, callback }) {
-  console.log(postId, commentId)
   const [confirmOpen, setConfirmOpen] = useState(false);
 
   const mutation = commentId ? DELETE_COMMENT_MUTATION : DELETE_POST_MUTATION;

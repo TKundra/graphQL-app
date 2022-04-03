@@ -9,7 +9,9 @@ import {
   Grid,
   Image,
   Icon,
-  Label
+  Label,
+  Container,
+  Divider
 } from 'semantic-ui-react';
 
 import { useSelector } from 'react-redux';
@@ -129,6 +131,8 @@ const SinglePost = (props) => {
               </Card>
             )}
 
+            <Divider />
+
             {comments.map((comment) => (
               <Card fluid key={comment.id}>
                 <Card.Content>
@@ -141,6 +145,13 @@ const SinglePost = (props) => {
                 </Card.Content>
               </Card>
             ))}
+
+            {comments.length === 0 && 
+              <Container>
+                <Icon name="comments" size="small" />
+                <span>no comments</span>
+              </Container>
+            }
 
           </Grid.Column>
         </Grid.Row>

@@ -18,6 +18,8 @@ export const resolvers = {
         ...likesResolver.Mutation
     },
     Subscription: {
-        ...postsResolvers.Subscription
+        ...postsResolvers.Subscription,
+        ...likesResolver.Subscription,
+        ...commentsResolvers.Subscription,
     }
 }

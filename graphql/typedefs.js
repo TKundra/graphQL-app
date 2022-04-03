@@ -48,8 +48,19 @@ const typeDefs = gql`
         deleteComment(postId: ID!, commentId: ID!): Post!
         likePost(postId: ID!): Post!
     }
+    type CommentObject {
+        username: String!,
+        post: String!,
+        comment: String!
+    }
+    type LikeObject {
+        username: String!,
+        post: String!
+    }
     type Subscription {
-        newPost: Post!
+        newPost: Post!,
+        newComment: CommentObject,
+        liked: LikeObject
     }
 `;
 // [Comment!]! - do when atleast one comment should be there

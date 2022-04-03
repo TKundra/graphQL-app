@@ -153,6 +153,25 @@ const FETCH_POST_QUERY = gql`
   }
 `;
 
+const COMMENT_SUBSCRIBE = gql`
+  subscription subscribe {
+    newComment {
+      comment
+      username
+      post
+    }
+  }
+`;
+
+const LIKE_SUBSCRIBE = gql`
+  subscription subscribe {
+    liked {
+      username
+      post
+    }
+  }
+`;
+
 export {
   CREATE_POST_MUTATION,
   FETCH_POSTS_QUERY,
@@ -162,5 +181,7 @@ export {
   DELETE_COMMENT_MUTATION,
   DELETE_POST_MUTATION,
   SUBMIT_COMMENT_MUTATION,
-  FETCH_POST_QUERY
+  FETCH_POST_QUERY,
+  COMMENT_SUBSCRIBE,
+  LIKE_SUBSCRIBE
 }

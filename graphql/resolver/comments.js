@@ -2,6 +2,9 @@ import { Posts } from "../../schema"
 import { authenticate } from "../../util/authenticate";
 import { AuthenticationError, UserInputError } from "apollo-server-express";
 
+import { PubSub } from 'graphql-subscriptions';
+const pubsub = new PubSub();
+
 const commentsResolvers = {
     Mutation: {
         createComment: async(parent, {postId, body}, context, info) => {
@@ -21,6 +24,9 @@ const commentsResolvers = {
                     createdAt: new Date().toISOString()
                 });
                 await post.save();
+                pubsub.publish("NEW_COMMENT", {
+                    newComment: {comment: body, username: user.username, post: post.body}
+                });
                 return post;
             } else throw UserInputError('post not found');
         },
@@ -39,6 +45,11 @@ const commentsResolvers = {
             } else {
                 throw new UserInputError('post not found')
             }
+        }
+    },
+    Subscription: {
+        newComment: {
+            subscribe: (parent, agrs, context, info) => pubsub.asyncIterator(["NEW_COMMENT"])
         }
     }
 }
